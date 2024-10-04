@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 typedef void CallbackButtonTap({String buttonText});
 
 class KeyboardButtons extends StatelessWidget {
-  KeyboardButtons({this.buttons, @required this.onTap});
+  KeyboardButtons({required this.buttons, required this.onTap});
 
   final String buttons;
   final CallbackButtonTap onTap;
@@ -38,9 +38,8 @@ class KeyboardButtons extends StatelessWidget {
         buttons == RIGHT_QUOTE_SIGN);
   }
 
-  bool _fontSize(){
-    return (
-        buttons == LN_SIGN ||
+  bool _fontSize() {
+    return (buttons == LN_SIGN ||
         buttons == LG_SIGN ||
         buttons == SIN_SIGN ||
         buttons == COS_SIGN ||
@@ -52,8 +51,7 @@ class KeyboardButtons extends StatelessWidget {
         buttons == ARCTAN_SIGN ||
         buttons == LN2_SIGN ||
         buttons == LEFT_QUOTE_SIGN ||
-        buttons == RIGHT_QUOTE_SIGN
-    );
+        buttons == RIGHT_QUOTE_SIGN);
   }
 
   @override
@@ -61,18 +59,22 @@ class KeyboardButtons extends StatelessWidget {
     return Expanded(
       child: Container(
         alignment: Alignment.center,
-        child: FlatButton(
-          color: (buttons == EQUAL_SIGN)
-              ? Theme.of(context).primaryColor
-              : Color(0xFFFFFFFF),
-          padding: EdgeInsets.symmetric(vertical: 10.0),
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+        child: TextButton(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(
+              (buttons == EQUAL_SIGN)
+                  ? Theme.of(context).primaryColor
+                  : Color(0xFFFFFFFF),
+            ),
+          ),
           child: Text(
             buttons,
             style: TextStyle(
                 color: (_colorTextButtons())
                     ? Colors.blueAccent
                     : (buttons == EQUAL_SIGN)
-                        ? Theme.of(context).buttonColor
+                        ? Colors.white
                         : Color(0xFF444444),
                 fontSize: _fontSize() ? 18 : 20.0),
           ),

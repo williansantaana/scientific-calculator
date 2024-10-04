@@ -29,7 +29,7 @@ class _ScientificCalculatorState extends State<ScientificCalculator> {
 
   void initialise() {}
 
-  void _onPressed({String buttonText}) {
+  void _onPressed({String? buttonText}) {
     switch (buttonText) {
       case EXCHANGE_CALCULATOR:
         setState(() {
@@ -246,49 +246,52 @@ class _ScientificCalculatorState extends State<ScientificCalculator> {
         centerTitle: true,
         elevation: 0.0,
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Expanded(child: Container()),
-            Container(
-              alignment: Alignment.topRight,
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: SingleChildScrollView(
-                child: !scientificKeyboard
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          _inOutExpression(firstOperand, equationFontSize),
-                          operators != ''
-                              ? _inOutExpression(operators, equationFontSize)
-                              : Container(),
-                          secondOperand != ''
-                              ? _inOutExpression(secondOperand, equationFontSize)
-                              : Container(),
-                          result != ''
-                              ? _inOutExpression(result, resultFontSize)
-                              : Container(),
-                        ],
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          _inOutExpression(equation, equationFontSize),
-                          result != ''
-                              ? _inOutExpression(result, resultFontSize)
-                              : Container(),
-                        ],
-                      ),
+      body: SafeArea(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Expanded(child: Container()),
+              Container(
+                alignment: Alignment.topRight,
+                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: SingleChildScrollView(
+                  child: !scientificKeyboard
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            _inOutExpression(firstOperand, equationFontSize),
+                            operators != ''
+                                ? _inOutExpression(operators, equationFontSize)
+                                : Container(),
+                            secondOperand != ''
+                                ? _inOutExpression(
+                                    secondOperand, equationFontSize)
+                                : Container(),
+                            result != ''
+                                ? _inOutExpression(result, resultFontSize)
+                                : Container(),
+                          ],
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            _inOutExpression(equation, equationFontSize),
+                            result != ''
+                                ? _inOutExpression(result, resultFontSize)
+                                : Container(),
+                          ],
+                        ),
+                ),
               ),
-            ),
-            Keyboard(
-              keyboardSigns: (scientificKeyboard)
-                  ? keyboardScientificCalculator
-                  : keyboardSingleCalculator,
-              onTap: _onPressed,
-            ),
-          ],
+              Keyboard(
+                keyboardSigns: (scientificKeyboard)
+                    ? keyboardScientificCalculator
+                    : keyboardSingleCalculator,
+                onTap: _onPressed,
+              ),
+            ],
+          ),
         ),
       ),
     );
