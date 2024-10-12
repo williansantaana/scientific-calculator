@@ -1,5 +1,5 @@
-import 'package:math_expressions/math_expressions.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 import 'constants.dart';
 import 'keyboard.dart';
 
@@ -10,11 +10,13 @@ String equation = '0';
 String result = '';
 
 class ScientificCalculator extends StatefulWidget {
+  const ScientificCalculator({super.key});
+
   @override
-  _ScientificCalculatorState createState() => _ScientificCalculatorState();
+  ScientificCalculatorState createState() => ScientificCalculatorState();
 }
 
-class _ScientificCalculatorState extends State<ScientificCalculator> {
+class ScientificCalculatorState extends State<ScientificCalculator> {
   bool scientificKeyboard = false;
 
   @override
@@ -29,7 +31,7 @@ class _ScientificCalculatorState extends State<ScientificCalculator> {
 
   void initialise() {}
 
-  void _onPressed({String buttonText}) {
+  void _onPressed({String? buttonText}) {
     switch (buttonText) {
       case EXCHANGE_CALCULATOR:
         setState(() {
@@ -242,17 +244,17 @@ class _ScientificCalculatorState extends State<ScientificCalculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calculator'),
+        title: const Text('Calculator'),
         centerTitle: true,
         elevation: 0.0,
       ),
-      body: Container(
+      body: SafeArea(
         child: Column(
           children: <Widget>[
             Expanded(child: Container()),
             Container(
               alignment: Alignment.topRight,
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
               child: SingleChildScrollView(
                 child: !scientificKeyboard
                     ? Column(
@@ -263,7 +265,8 @@ class _ScientificCalculatorState extends State<ScientificCalculator> {
                               ? _inOutExpression(operators, equationFontSize)
                               : Container(),
                           secondOperand != ''
-                              ? _inOutExpression(secondOperand, equationFontSize)
+                              ? _inOutExpression(
+                                  secondOperand, equationFontSize)
                               : Container(),
                           result != ''
                               ? _inOutExpression(result, resultFontSize)
@@ -301,7 +304,7 @@ class _ScientificCalculatorState extends State<ScientificCalculator> {
       child: Text(
         text is double ? text.toStringAsFixed(2) : text.toString(),
         style: TextStyle(
-          color: Color(0xFF444444),
+          color: const Color(0xFF444444),
           fontSize: size,
         ),
         textAlign: TextAlign.end,

@@ -2,7 +2,11 @@ import 'keyboard_buttons.dart';
 import 'package:flutter/material.dart';
 
 class KeyboardRows extends StatelessWidget {
-  KeyboardRows({@required this.rowsButtons, this.onTap});
+  const KeyboardRows({
+    super.key,
+    required this.rowsButtons,
+    required this.onTap,
+  });
 
   final List<String> rowsButtons;
   final CallbackButtonTap onTap;
@@ -10,21 +14,23 @@ class KeyboardRows extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: buttons(),
       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: buttons(),
     );
   }
 
   List<Widget> buttons() {
     List<Widget> buttons = [];
-    rowsButtons.forEach((String buttonText) {
+
+    for (String buttonText in rowsButtons) {
       buttons.add(
         KeyboardButtons(
           buttons: buttonText,
           onTap: onTap,
         ),
       );
-    });
+    }
+
     return buttons;
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'keyboard_buttons.dart';
 
 class Keyboard extends StatelessWidget {
-  Keyboard({@required this.onTap, this.keyboardSigns});
+  const Keyboard({super.key, required this.onTap, required this.keyboardSigns});
 
   final CallbackButtonTap onTap;
   final List keyboardSigns;
